@@ -1,8 +1,3 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
-
-
 const getSum = () => {
     // Select all the price elements in the table
     const priceElements = document.querySelectorAll(".price");
@@ -15,21 +10,29 @@ const getSum = () => {
         totalSum += parseFloat(priceElement.textContent);
     });
 
-    // Create a new row for the total
-    const totalRow = document.createElement("tr");
+    // Check if total row already exists
+    let totalRow = document.querySelector(".total-row");
+    if (!totalRow) {
+        // Create a new row for the total
+        totalRow = document.createElement("tr");
+        totalRow.className = "total-row";
 
-    // Create the cell for "Total" text
-    const totalLabelCell = document.createElement("td");
-    totalLabelCell.textContent = "Total";
-    totalRow.appendChild(totalLabelCell);
+        // Create the cell for "Total" text
+        const totalLabelCell = document.createElement("td");
+        totalLabelCell.textContent = "Total";
+        totalRow.appendChild(totalLabelCell);
+
+        // Append the new total row to the table
+        document.querySelector("table").appendChild(totalRow);
+    }
 
     // Create the cell for the total price value
-    const totalPriceCell = document.createElement("td");
+    let totalPriceCell = totalRow.querySelector(".total-price");
+    if (!totalPriceCell) {
+        totalPriceCell = document.createElement("td");
+        totalPriceCell.className = "total-price";
+        totalRow.appendChild(totalPriceCell);
+    }
     totalPriceCell.textContent = totalSum.toFixed(2); // Display the sum with two decimal points
-    totalRow.appendChild(totalPriceCell);
-
-    // Append the new total row to the table
-    document.querySelector("table").appendChild(totalRow);
 };
 getSumBtn.addEventListener("click", getSum);
-
