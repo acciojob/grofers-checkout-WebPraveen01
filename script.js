@@ -19,7 +19,7 @@ const getSum = () => {
     });
 
     // Check if the total row already exists
-    let totalRow = document.querySelector("#totalRow");
+    let totalRow = document.querySelector("#ans");
 
     if (!totalRow) {
         // If the total row does not exist, create it
